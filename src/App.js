@@ -1,3 +1,5 @@
+import logo  from './images/logo.svg';
+
 function App() {
   return (
     <div className="page">
@@ -5,7 +7,7 @@ function App() {
         <header className="header">
           <img
             className="header__logo"
-            src="images/logo.svg"
+            src={logo}
             alt="Логотип проекта Место"
           />
         </header>
