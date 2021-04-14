@@ -1,9 +1,24 @@
 function Main() {
-  return (
+    const handleEditAvatarClick = () => {
+        const popup = document.querySelector('.popup_type_change-avatar')
+        popup.classList.add('popup_active')
+    }
+  
+    const handleEditProfileClick = () => {
+        const popup = document.querySelector('.popup_type_edit-profile')
+        popup.classList.add('popup_active')
+    }
+
+    const handleAddPlaceClick = () => {
+        const popup = document.querySelector('.popup_type_add-place')
+        popup.classList.add('popup_active')
+    }
+
+    return (
     <>
       <main className="content">
         <section className="profile">
-          <button type="button" className="profile__avatar-edit-button">
+          <button type="button" onClick={handleEditAvatarClick} className="profile__avatar-edit-button">
             <img
               className="profile__avatar"
               src="images/avatar-image.jpg"
@@ -13,11 +28,11 @@ function Main() {
           <div className="profile__info-container">
             <div className="profile__info">
               <h1 className="profile__title">Жак-Ив Кусто</h1>
-              <button type="button" className="profile__edit-button"></button>
+              <button type="button" onClick={handleEditProfileClick} className="profile__edit-button"></button>
             </div>
             <p className="profile__subtitle">Исследователь океана</p>
           </div>
-          <button type="button" className="profile__add-button"></button>
+          <button type="button" onClick={handleAddPlaceClick} className="profile__add-button"></button>
         </section>
         <section className="elements"></section>
       </main>
