@@ -1,6 +1,6 @@
 function PopupWithForm(props) {
   return (
-    <section className={`popup popup_type_${props.name}`}>
+    <section className={`popup popup_type_${props.name} ${props.isOpen}`}>
       <div className="popup__container">
         <form
           noValidate

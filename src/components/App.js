@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -5,15 +6,38 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+
+  const handleEditProfileClick = () => {
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+  };
+
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
+  const handleAddPlaceClick = () => {
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+  };
+
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
+  const handleEditAvatarClick = () => {
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+  };
+
   return (
     <div className="page">
       <div className="page__container">
         <Header />
-        <Main />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+        />
         <PopupWithForm
           name="edit-profile"
           title="Редактировать профиль"
           buttonTitle="Сохранить"
+          isOpen={isEditProfilePopupOpen ? "popup_active" : " "}
         >
           <input
             required
@@ -42,6 +66,7 @@ function App() {
           name="add-place"
           title="Новое место"
           buttonTitle="Создать"
+          isOpen={isAddPlacePopupOpen ? "popup_active" : " "}
         >
           <input
             required
@@ -68,6 +93,7 @@ function App() {
           name="change-avatar"
           title="Обновить аватар"
           buttonTitle="Сохранить"
+          isOpen={isEditAvatarPopupOpen ? "popup_active" : " "}
         >
           <input
             required

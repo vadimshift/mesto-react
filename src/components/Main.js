@@ -1,18 +1,5 @@
-function Main() {
-  const handleEditAvatarClick = () => {
-    const popup = document.querySelector(".popup_type_change-avatar");
-    popup.classList.add("popup_active");
-  };
+function Main(props) {
 
-  const handleEditProfileClick = () => {
-    const popup = document.querySelector(".popup_type_edit-profile");
-    popup.classList.add("popup_active");
-  };
-
-  const handleAddPlaceClick = () => {
-    const popup = document.querySelector(".popup_type_add-place");
-    popup.classList.add("popup_active");
-  };
 
   return (
     <>
@@ -20,7 +7,7 @@ function Main() {
         <section className="profile">
           <button
             type="button"
-            onClick={handleEditAvatarClick}
+            onClick={props.onEditAvatar}
             className="profile__avatar-edit-button"
           >
             <img
@@ -34,7 +21,7 @@ function Main() {
               <h1 className="profile__title">Жак-Ив Кусто</h1>
               <button
                 type="button"
-                onClick={handleEditProfileClick}
+                onClick={props.onEditProfile}
                 className="profile__edit-button"
               ></button>
             </div>
@@ -42,7 +29,7 @@ function Main() {
           </div>
           <button
             type="button"
-            onClick={handleAddPlaceClick}
+            onClick={props.onAddPlace}
             className="profile__add-button"
           ></button>
         </section>
