@@ -24,6 +24,12 @@ function App() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   };
 
+  const closeAllPopups = () => {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  };
+
   return (
     <div className="page">
       <div className="page__container">
@@ -38,6 +44,7 @@ function App() {
           title="Редактировать профиль"
           buttonTitle="Сохранить"
           isOpen={isEditProfilePopupOpen ? "popup_active" : " "}
+          onClose={closeAllPopups}
         >
           <input
             required
@@ -67,6 +74,7 @@ function App() {
           title="Новое место"
           buttonTitle="Создать"
           isOpen={isAddPlacePopupOpen ? "popup_active" : " "}
+          onClose={closeAllPopups}
         >
           <input
             required
@@ -94,6 +102,7 @@ function App() {
           title="Обновить аватар"
           buttonTitle="Сохранить"
           isOpen={isEditAvatarPopupOpen ? "popup_active" : " "}
+          onClose={closeAllPopups}
         >
           <input
             required
