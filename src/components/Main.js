@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../utils/Api";
+import Card from "../components/Card";
 
 function Main(props) {
   const [userName, setUserName] = useState([]);
@@ -13,7 +14,13 @@ function Main(props) {
         setUserName(userData.name);
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
-        console.log(cardsData);
+        const data = cardsData.map((item) => ({
+          id: item._id,
+          name: item.name,
+          link: item.link,
+          likes: item.likes,
+        }));
+        setCards(data);
       })
       .catch((err) => {
         console.log(`Ошибка ${err}`);
@@ -52,26 +59,12 @@ function Main(props) {
             className="profile__add-button"
           ></button>
         </section>
-        <section className="elements"></section>
+        <section className="elements">
+          {cards.map((card) => 
+           <Card key={card.id} name={card.name} link={card.link} likes={card.likes.length}/>
+          )}
+        </section>
       </main>
-
-      <template className="template-place">
-        <article className="element">
-          <div className="element__image-container">
-            <img className="element__image" src="#" alt="#" />
-          </div>
-          <div className="element__title">
-            <h2 className="element__text-title"></h2>
-            <div className="element__like-container">
-              <button type="button" className="element__like-button"></button>
-              <p className="element__like-amount"></p>
-            </div>
-          </div>
-          <button type="button" className="element__delete-button">
-            <img src="images/delete-icon.svg" alt="Кнопка удаления карточки" />
-          </button>
-        </article>
-      </template>
     </>
   );
 }
