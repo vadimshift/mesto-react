@@ -30,6 +30,8 @@ function App() {
     setIsEditAvatarPopupOpen(false);
   };
 
+  
+
   return (
     <div className="page">
       <div className="page__container">

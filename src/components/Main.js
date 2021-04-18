@@ -1,5 +1,18 @@
-function Main(props) {
+import { useState, useEffect } from "react";
+import api from "../utils/Api";
 
+function Main(props) {
+  const [userName, setUserName] = useState([]);
+  const [userDescription, setUserDescription] = useState([]);
+  const [userAvatar, setUserAvatar] = useState([]);
+
+  useEffect(() => {
+    api.getProfileInfo().then((data) => {
+      setUserName(data.name);
+      setUserDescription(data.about);
+      setUserAvatar(data.avatar);
+    });
+  }, []);
 
   return (
     <>
@@ -12,20 +25,20 @@ function Main(props) {
           >
             <img
               className="profile__avatar"
-              src="images/avatar-image.jpg"
+              src={userAvatar}
               alt="фотография профиля"
             />
           </button>
           <div className="profile__info-container">
             <div className="profile__info">
-              <h1 className="profile__title">Жак-Ив Кусто</h1>
+              <h1 className="profile__title">{userName}</h1>
               <button
                 type="button"
                 onClick={props.onEditProfile}
                 className="profile__edit-button"
               ></button>
             </div>
-            <p className="profile__subtitle">Исследователь океана</p>
+            <p className="profile__subtitle">{userDescription}</p>
           </div>
           <button
             type="button"
