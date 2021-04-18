@@ -5,13 +5,19 @@ function Main(props) {
   const [userName, setUserName] = useState([]);
   const [userDescription, setUserDescription] = useState([]);
   const [userAvatar, setUserAvatar] = useState([]);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.getProfileInfo().then((data) => {
-      setUserName(data.name);
-      setUserDescription(data.about);
-      setUserAvatar(data.avatar);
-    });
+    Promise.all([api.getProfileInfo(), api.getCards()])
+      .then(([userData, cardsData]) => {
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        console.log(cardsData);
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`);
+      });
   }, []);
 
   return (
