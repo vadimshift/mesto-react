@@ -8,6 +8,7 @@ function Main(props) {
   const [userAvatar, setUserAvatar] = useState([]);
   const [cards, setCards] = useState([]);
 
+  
   useEffect(() => {
     Promise.all([api.getProfileInfo(), api.getCards()])
       .then(([userData, cardsData]) => {
@@ -60,9 +61,15 @@ function Main(props) {
           ></button>
         </section>
         <section className="elements">
-          {cards.map((card) => 
-           <Card key={card.id} name={card.name} link={card.link} likes={card.likes.length}/>
-          )}
+          {cards.map((card) => (
+            <Card
+              onCardClick={props.onCardClick}  
+              key={card.id}
+              name={card.name}
+              link={card.link}
+              likes={card.likes.length}
+            />
+          ))}
         </section>
       </main>
     </>

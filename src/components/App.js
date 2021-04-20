@@ -28,9 +28,14 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setSelectedCard({});
   };
 
-  
+  const [selectedCard, setSelectedCard] = useState({});
+
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+  };
 
   return (
     <div className="page">
@@ -40,6 +45,7 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
         />
         <PopupWithForm
           name="edit-profile"
@@ -121,7 +127,7 @@ function App() {
           title="Вы уверены?"
           buttonTitle="Да"
         ></PopupWithForm>
-        <ImagePopup />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <Footer />
       </div>
     </div>

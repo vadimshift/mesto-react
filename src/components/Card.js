@@ -1,8 +1,17 @@
 function Card(card) {
+  const handleClick = () => {
+    card.onCardClick(card)
+  };
+
   return (
     <article className="element">
       <div className="element__image-container">
-        <img className="element__image" src={card.link} alt="#" />
+        <img
+          className="element__image"
+          src={card.link}
+          alt={card.name}
+          onClick={handleClick}
+        />
       </div>
       <div className="element__title">
         <h2 className="element__text-title">{card.name}</h2>
