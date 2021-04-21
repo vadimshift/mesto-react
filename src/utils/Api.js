@@ -1,12 +1,12 @@
-import {options} from './constants'
+import {apiOptions} from './constants'
 
 class Api {
-  constructor(options) {
-    this._userUrl = options.userUrl;
-    this._cardsUrl = options.cardsUrl;
-    this._cardsUrlLike = options.cardsUrlLike;
-    this._userAvatar = options.userAvatar;
-    this._headers = options.headers;
+  constructor(apiOptions) {
+    this._userUrl = apiOptions.userUrl;
+    this._cardsUrl = apiOptions.cardsUrl;
+    this._cardsUrlLike = apiOptions.cardsUrlLike;
+    this._userAvatar = apiOptions.userAvatar;
+    this._headers = apiOptions.headers;
   }
 
   _parseResponse(res) {
@@ -98,6 +98,6 @@ class Api {
   }
 }
 
-const api = new Api(options);
+const api = new Api(apiOptions);
 
 export default api;

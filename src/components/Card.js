@@ -1,8 +1,7 @@
-function Card(card) {
+function Card({card, onCardClick}) {
   const handleClick = () => {
-    card.onCardClick(card)
+    onCardClick(card);
   };
-
   return (
     <article className="element">
       <div className="element__image-container">
@@ -17,7 +16,7 @@ function Card(card) {
         <h2 className="element__text-title">{card.name}</h2>
         <div className="element__like-container">
           <button type="button" className="element__like-button"></button>
-          <p className="element__like-amount">{card.likes}</p>
+          <p className="element__like-amount">{card.likes.length}</p>
         </div>
       </div>
       <button type="button" className="element__delete-button">
