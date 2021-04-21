@@ -1,10 +1,12 @@
-# Getting Started with Create React App
+# Проект Mesto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Проект для отображения красивых мест, которые стоит посетить.
+Можно добавлять карточки с местом, указывая описание. Реализована возможность
+добавления like'ов, реализована возможность удаления своих карточек с местом.
 
-## Available Scripts
+Используется API, React
 
-In the project directory, you can run:
+site-link: https://vadimshift.github.io/mesto-react/
 
 ### `npm start`
 
