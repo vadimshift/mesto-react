@@ -51,7 +51,7 @@ function App() {
           name="edit-profile"
           title="Редактировать профиль"
           buttonTitle="Сохранить"
-          isOpen={isEditProfilePopupOpen ? "popup_active" : " "}
+          isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
         >
           <input
@@ -81,7 +81,7 @@ function App() {
           name="add-place"
           title="Новое место"
           buttonTitle="Создать"
-          isOpen={isAddPlacePopupOpen ? "popup_active" : " "}
+          isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
         >
           <input
@@ -109,7 +109,7 @@ function App() {
           name="change-avatar"
           title="Обновить аватар"
           buttonTitle="Сохранить"
-          isOpen={isEditAvatarPopupOpen ? "popup_active" : " "}
+          isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
         >
           <input
