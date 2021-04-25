@@ -12,7 +12,7 @@ function Main(props) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    const likeCard = () => {
+    const setLikeCard = () => {
       api.setLikeCard(card._id, !isLiked).then((newCard) => {
         setCards((cards) =>
           cards.map((c) => (c._id === card._id ? newCard : c))
@@ -20,7 +20,7 @@ function Main(props) {
       });
     };
 
-    const dislikeCard = () => {
+    const setDislikeCard = () => {
       api.delLikeCard(card._id, !isLiked).then((newCard) => {
         setCards((cards) =>
           cards.map((c) => (c._id === card._id ? newCard : c))
@@ -28,7 +28,13 @@ function Main(props) {
       });
     };
 
-    isLiked ? dislikeCard() : likeCard();
+    isLiked ? setDislikeCard() : setLikeCard();
+  }
+
+  function handleCardDelete(card) {
+    api.delCard(card._id).then(() => {
+      setCards((cards) => cards.filter((c) => c._id !== card._id));
+    });
   }
 
   useEffect(() => {
@@ -80,6 +86,7 @@ function Main(props) {
             card={card}
             onCardClick={props.onCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
         ))}
       </section>
