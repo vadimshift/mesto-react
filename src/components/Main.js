@@ -7,7 +7,6 @@ function Main(props) {
   const currentUser = useContext(CurrentUserContext);
   const [cards, setCards] = useState([]);
 
-  console.log(cards)
   useEffect(() => {
     api
       .getCards()
