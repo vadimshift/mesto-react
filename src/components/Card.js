@@ -1,7 +1,8 @@
 import { useContext } from "react";
+import deleteIcon from "../images/delete-icon.svg"
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Card({ card, onCardClick }) {
+function Card({ card, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
 
   // Определяем, являемся ли мы владельцем текущей карточки
@@ -23,6 +24,10 @@ function Card({ card, onCardClick }) {
   const handleClick = () => {
     onCardClick(card);
   };
+
+  const handleLikeClick = () => {
+    onCardLike(card);
+  }
   return (
     <article className="element">
       <div className="element__image-container">
@@ -36,12 +41,12 @@ function Card({ card, onCardClick }) {
       <div className="element__title">
         <h2 className="element__text-title">{card.name}</h2>
         <div className="element__like-container">
-          <button type="button" className={cardLikeButtonClassName}></button>
+          <button type="button" className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
           <p className="element__like-amount">{card.likes.length}</p>
         </div>
       </div>
       <button type="button" className={cardDeleteButtonClassName}>
-        <img src="images/delete-icon.svg" alt="Кнопка удаления карточки" />
+        <img src={deleteIcon} alt="Кнопка удаления карточки" />
       </button>
     </article>
   );
