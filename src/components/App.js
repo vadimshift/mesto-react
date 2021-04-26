@@ -11,6 +11,18 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
+  const handleUpdateUser = (data) => {
+   api
+      .setNewProfileInfo(data)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`);
+      });
+  };
+
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
@@ -69,6 +81,7 @@ function App() {
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
@@ -79,7 +92,6 @@ function App() {
             onClose={closeAllPopups}
           />
           <PopupWithForm
-            onSubmit
             name="submit-form"
             title="Вы уверены?"
             buttonTitle="Да"

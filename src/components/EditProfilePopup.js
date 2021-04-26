@@ -1,9 +1,18 @@
-import { useState, useContext, useEffect } from 'react';
-import CurrentUserContext from '../contexts/CurrentUserContext';
+import { useState, useContext, useEffect } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  function handleSubmit(e) {
+    e.preventDefault();
+    // Передаём значения управляемых компонентов во внешний обработчик
+    props.onUpdateUser({
+      name,
+      about: description,
+    });
+  }
+
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const hendleChangeName = (e) => {
     setName(e.target.value);
@@ -23,11 +32,12 @@ function EditProfilePopup(props) {
   return (
     <section
       className={`popup popup_type_edit-profile ${
-        props.isOpen ? 'popup_active' : ''
+        props.isOpen ? "popup_active" : ""
       }`}
     >
       <div className="popup__container">
         <form
+          onSubmit={handleSubmit}
           noValidate
           name="profile"
           className="popup__form popup__form_type_edit-profile"
@@ -42,7 +52,7 @@ function EditProfilePopup(props) {
             type="text"
             placeholder="Имя"
             className="popup__enter popup__enter_type_name"
-            value={name || ''}
+            value={name || ""}
             onChange={hendleChangeName}
           />
           <span className="enterNameProfile-error popup__error-message"></span>
@@ -55,13 +65,12 @@ function EditProfilePopup(props) {
             type="text"
             placeholder="О себе"
             className="popup__enter popup__enter_type_about"
-            value={description || ''}
+            value={description || ""}
             onChange={hendleChangeDescription}
           />
           <span className="popup__error-message enterAboutProfile-error"></span>
 
           <button
-            disabled
             type="submit"
             className="popup__submit-button popup__submit-button_type_edit-profile"
           >
