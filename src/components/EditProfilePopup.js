@@ -1,8 +1,29 @@
+import { useState, useContext, useEffect } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+
 function EditProfilePopup(props) {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+
+  const hendleChangeName = (e) => {
+    setName(e.target.value);
+  };
+
+  const hendleChangeDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const currentUser = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
+
   return (
     <section
       className={`popup popup_type_edit-profile ${
-        props.isOpen ? "popup_active" : ""
+        props.isOpen ? 'popup_active' : ''
       }`}
     >
       <div className="popup__container">
@@ -21,6 +42,8 @@ function EditProfilePopup(props) {
             type="text"
             placeholder="Имя"
             className="popup__enter popup__enter_type_name"
+            value={name || ''}
+            onChange={hendleChangeName}
           />
           <span className="enterNameProfile-error popup__error-message"></span>
           <input
@@ -32,6 +55,8 @@ function EditProfilePopup(props) {
             type="text"
             placeholder="О себе"
             className="popup__enter popup__enter_type_about"
+            value={description || ''}
+            onChange={hendleChangeDescription}
           />
           <span className="popup__error-message enterAboutProfile-error"></span>
 

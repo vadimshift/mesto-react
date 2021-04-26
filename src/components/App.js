@@ -79,6 +79,7 @@ function App() {
             onClose={closeAllPopups}
           />
           <PopupWithForm
+            onSubmit
             name="submit-form"
             title="Вы уверены?"
             buttonTitle="Да"
