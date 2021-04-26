@@ -11,8 +11,20 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
+  const handleUpdateAvatar = (data) => {
+    api
+      .setNewAvatar(data)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`);
+      });
+  };
+
   const handleUpdateUser = (data) => {
-   api
+    api
       .setNewProfileInfo(data)
       .then((data) => {
         setCurrentUser(data);
@@ -86,6 +98,7 @@ function App() {
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}

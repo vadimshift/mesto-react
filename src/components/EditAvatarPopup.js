@@ -1,4 +1,17 @@
+import { useState, useContext, useEffect, useRef } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+
 function EditAvatarPopup(props) {
+  //const currentUser = useContext(CurrentUserContext);
+  const avatarRef = useRef();
+  
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onUpdateAvatar({
+      avatar: avatarRef.current.value
+    });
+  }
+
   return (
     <section
       className={`popup popup_type_change-avatar ${
@@ -7,6 +20,7 @@ function EditAvatarPopup(props) {
     >
       <div className="popup__container">
         <form
+          onSubmit={handleSubmit}
           noValidate
           name="profile"
           className="popup__form popup__form_type_change-avatar"
@@ -19,10 +33,10 @@ function EditAvatarPopup(props) {
             name="link"
             placeholder="Ссылка на картинку"
             className="popup__enter popup__enter_type_link-avatar"
+            ref={avatarRef}
           />
           <span className="popup__error-message enterLinkAvatar-error"></span>
           <button
-            disabled
             type="submit"
             className="popup__submit-button popup__submit-button_type_change-avatar"
           >
