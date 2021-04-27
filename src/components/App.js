@@ -14,10 +14,15 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const handleAddPlaceSubmit = (data) => {
-    api.setNewCard(data).then((newCard) => {
-      setCards([newCard, ...cards]);
-      closeAllPopups();
-    });
+    api
+      .setNewCard(data)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`);
+      });
   };
 
   function handleCardLike(card) {
@@ -26,28 +31,43 @@ function App() {
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     const setLikeCard = () => {
-      api.setLikeCard(card._id, !isLiked).then((newCard) => {
-        setCards((cards) =>
-          cards.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
+      api
+        .setLikeCard(card._id, !isLiked)
+        .then((newCard) => {
+          setCards((cards) =>
+            cards.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => {
+          console.log(`Ошибка ${err}`);
+        });
     };
 
     const setDislikeCard = () => {
-      api.delLikeCard(card._id, !isLiked).then((newCard) => {
-        setCards((cards) =>
-          cards.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
+      api
+        .delLikeCard(card._id, !isLiked)
+        .then((newCard) => {
+          setCards((cards) =>
+            cards.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => {
+          console.log(`Ошибка ${err}`);
+        });
     };
 
     isLiked ? setDislikeCard() : setLikeCard();
   }
 
   function handleCardDelete(card) {
-    api.delCard(card._id).then(() => {
-      setCards((cards) => cards.filter((c) => c._id !== card._id));
-    });
+    api
+      .delCard(card._id)
+      .then(() => {
+        setCards((cards) => cards.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`);
+      });
   }
 
   useEffect(() => {

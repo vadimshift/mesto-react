@@ -1,13 +1,12 @@
 import { useState } from "react";
 
 function AddPlacePopup(props) {
-
   function handleSubmit(e) {
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
     props.onAddPlace({
       placeName,
-      placeLink
+      placeLink,
     });
   }
 
@@ -21,7 +20,6 @@ function AddPlacePopup(props) {
   const hendleChangePlaceLink = (e) => {
     setPlaceLink(e.target.value);
   };
-
 
   return (
     <section
