@@ -11,6 +11,56 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
+  const [cards, setCards] = useState([]);
+
+  const handleAddPlaceSubmit = (data) => {
+    api.setNewCard(data).then((newCard) => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    });
+  };
+
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    const setLikeCard = () => {
+      api.setLikeCard(card._id, !isLiked).then((newCard) => {
+        setCards((cards) =>
+          cards.map((c) => (c._id === card._id ? newCard : c))
+        );
+      });
+    };
+
+    const setDislikeCard = () => {
+      api.delLikeCard(card._id, !isLiked).then((newCard) => {
+        setCards((cards) =>
+          cards.map((c) => (c._id === card._id ? newCard : c))
+        );
+      });
+    };
+
+    isLiked ? setDislikeCard() : setLikeCard();
+  }
+
+  function handleCardDelete(card) {
+    api.delCard(card._id).then(() => {
+      setCards((cards) => cards.filter((c) => c._id !== card._id));
+    });
+  }
+
+  useEffect(() => {
+    api
+      .getCards()
+      .then((cardsData) => {
+        setCards(cardsData);
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`);
+      });
+  }, []);
+
   const handleUpdateAvatar = (data) => {
     api
       .setNewAvatar(data)
@@ -89,6 +139,9 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
             onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
@@ -103,6 +156,7 @@ function App() {
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
           />
           <PopupWithForm
             name="submit-form"

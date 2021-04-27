@@ -1,14 +1,13 @@
-import { useState, useContext, useEffect, useRef } from "react";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import { useRef } from "react";
 
 function EditAvatarPopup(props) {
   //const currentUser = useContext(CurrentUserContext);
   const avatarRef = useRef();
-  
+
   function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateAvatar({
-      avatar: avatarRef.current.value
+      avatar: avatarRef.current.value,
     });
   }
 

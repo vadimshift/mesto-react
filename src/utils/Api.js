@@ -1,4 +1,4 @@
-import {apiOptions} from './constants'
+import { apiOptions } from "./constants";
 
 class Api {
   constructor(apiOptions) {
@@ -45,13 +45,13 @@ class Api {
       .catch((err) => Promise.reject(err));
   }
 
-  setNewCard(formData) {
+  setNewCard({ placeName, placeLink }) {
     return fetch(this._cardsUrl, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: formData.name,
-        link: formData.link,
+        name: placeName,
+        link: placeLink,
       }),
     })
       .then((res) => this._parseResponse(res))
@@ -90,7 +90,7 @@ class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar
+        avatar: data.avatar,
       }),
     })
       .then((res) => this._parseResponse(res))
