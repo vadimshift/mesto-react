@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import PopupWithForm from "./PopupWithForm";
 
 function EditProfilePopup(props) {
   function handleSubmit(e) {
@@ -30,60 +31,41 @@ function EditProfilePopup(props) {
   }, [currentUser]);
 
   return (
-    <section
-      className={`popup popup_type_edit-profile ${
-        props.isOpen ? "popup_active" : ""
-      }`}
+    <PopupWithForm
+      name="edit-profile"
+      title="Редактировать профиль"
+      buttonTitle="Сохранить"
+      onSubmit={handleSubmit}
+      isOpen={props.isOpen}
+      onClose={props.onClose}
     >
-      <div className="popup__container">
-        <form
-          onSubmit={handleSubmit}
-          noValidate
-          name="profile"
-          className="popup__form popup__form_type_edit-profile"
-        >
-          <h2 className="popup__title">Редактировать профиль</h2>
-          <input
-            required
-            minLength="2"
-            maxLength="40"
-            id="enterNameProfile"
-            name="name"
-            type="text"
-            placeholder="Имя"
-            className="popup__enter popup__enter_type_name"
-            value={name || ""}
-            onChange={hendleChangeName}
-          />
-          <span className="enterNameProfile-error popup__error-message"></span>
-          <input
-            required
-            minLength="2"
-            maxLength="200"
-            id="enterAboutProfile"
-            name="about"
-            type="text"
-            placeholder="О себе"
-            className="popup__enter popup__enter_type_about"
-            value={description || ""}
-            onChange={hendleChangeDescription}
-          />
-          <span className="popup__error-message enterAboutProfile-error"></span>
-
-          <button
-            type="submit"
-            className="popup__submit-button popup__submit-button_type_edit-profile"
-          >
-            Сохранить
-          </button>
-        </form>
-        <button
-          type="button"
-          onClick={props.onClose}
-          className="popup__close-button popup__close-button_type_edit-profile"
-        ></button>
-      </div>
-    </section>
+      <input
+        required
+        minLength="2"
+        maxLength="40"
+        id="enterNameProfile"
+        name="name"
+        type="text"
+        placeholder="Имя"
+        className="popup__enter popup__enter_type_name"
+        value={name || ""}
+        onChange={hendleChangeName}
+      />
+      <span className="enterNameProfile-error popup__error-message"></span>
+      <input
+        required
+        minLength="2"
+        maxLength="200"
+        id="enterAboutProfile"
+        name="about"
+        type="text"
+        placeholder="О себе"
+        className="popup__enter popup__enter_type_about"
+        value={description || ""}
+        onChange={hendleChangeDescription}
+      />
+      <span className="popup__error-message enterAboutProfile-error"></span>
+    </PopupWithForm>
   );
 }
 
